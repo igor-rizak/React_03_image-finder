@@ -1,13 +1,19 @@
 import css from './ImageGalleryItem.module.css';
 
-export const ImageGalleryItem = ({ hits }) => {
+export const ImageGalleryItem = ({ hits, modalOpen }) => {
   return (
     <>
-      {hits.map(item => (
-        <li key={item.id} className={css.ImageGalleryItem}>
+      {hits.map(({ id, webformatURL, tags, largeImageURL }) => (
+        <li
+          key={id}
+          className={css.ImageGalleryItem}
+          onClick={() => {
+            modalOpen(largeImageURL, tags);
+          }}
+        >
           <img
-            src={item.webformatURL}
-            alt={item.tags}
+            src={webformatURL}
+            alt={tags}
             className={css.ImageGalleryItem_image}
           />
         </li>
